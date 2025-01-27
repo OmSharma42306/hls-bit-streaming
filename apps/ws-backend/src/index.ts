@@ -1,26 +1,43 @@
-import {WebSocket,WebSocketServer} from "ws"
-
-
+import {OPEN, WebSocket,WebSocketServer} from "ws"
+import jwt, { JwtPayload } from "jsonwebtoken"
+const JWT_SECRET = "1232"
 const wss = new WebSocketServer({port:8080});
 
 
-wss.on('connection',function connection(ws){
+wss.on('connection',function connection(ws,request){
     console.log("Client Connected!")
 
-    ws.on('message',function message(data,isBinary){
-    
-    
-    
+    const url = request.url;  // ws:localhost:3000?token=123542
+    if(!url){
+        return;
+    }
+
+    const queryParams = new URLSearchParams(url.split('?')[1])   // .split["ws:localhost:3000","token=123542"]
+    const token:string|any = queryParams.get('token');
+
+    const decodedToken = jwt.verify(token,JWT_SECRET);
+    if(typeof decodedToken === "string"){
+        ws.close();
+        return;
+    }
+
+    if(!decodedToken || !decodedToken.userId){
+        ws.close();
+        return;
+    }
+    if(decodedToken){
+        // @ts-ignore
+        req.userId = decodedToken.userId;
+    }
+
     wss.clients.forEach((client)=>{
-        if(client.readyState === WebSocket.OPEN){
-            client.send("hi")
-            client.send(data,{binary:isBinary})
+        if(client.readyState === OPEN){
+            
         }
-        
     })
 
 
-    })
+
 
     ws.send("i am connected!")
 
