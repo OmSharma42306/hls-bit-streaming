@@ -1,10 +1,14 @@
-function App() {
-  
+import { useEffect, useState } from "react"
+import Header from "./components/Header";
+import UploadForm from "./components/UploadForm";
 
+function App() {
+    
   return (
-    <>
-      <h1>HLS BIT STREAMING</h1>
-    </>
+    <div className="min-h-screen bg-gray-100 p-4">
+        <Header/>
+        <UploadForm/>
+    </div>
   )
 }
 
