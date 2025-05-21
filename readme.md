@@ -20,3 +20,6 @@ This project allows users to upload video files via a React frontend, processes 
 [S3 Upload]
 |
 [HLS Video Access]
+
+
+![image info](./hls-architecture.png)
