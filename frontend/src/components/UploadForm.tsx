@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const UploadForm = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -13,6 +14,19 @@ const UploadForm = () => {
     const file = e.target.files?.[0];
     setVideoFile(file || null);
   };
+  async function handleFileUpload(){
+    if(!videoFile) return;
+    const formData = new FormData();
+    formData.append('file',videoFile);
+    const response = await axios.post('http://localhost:3000/upload-video',formData,{
+        headers:{
+            "Content-Type":"multipart/form-data"
+        }
+    });
+
+    console.log("upload successful!");
+    console.log(response.data);
+  }
 
   return (
     <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
@@ -36,7 +50,7 @@ const UploadForm = () => {
       <button
         className="mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
         disabled={!videoFile}
-        onClick={() => console.log("Trigger conversion logic here")}
+        onClick={handleFileUpload}
       >
         Convert to HLS
       </button>
