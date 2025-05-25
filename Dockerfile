@@ -12,6 +12,9 @@ WORKDIR /home/app
 # Copying Procecss Shell Script.
 COPY process.sh .
 
+# Copying NodeJs Service to Upload Final Files to S3.
+COPY final-upload-service .
+
 # Executing Script!
 RUN chmod +x process.sh
 
