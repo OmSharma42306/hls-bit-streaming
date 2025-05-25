@@ -9,4 +9,12 @@ RUN /usr/bin/apt-get update && \
 
 WORKDIR /home/app
 
-ENTRYPOINT [ "bash" ]
+# Copying Procecss Shell Script.
+COPY process.sh .
+
+# Executing Script!
+RUN chmod +x process.sh
+
+
+# ENTRYPOINT [ "bash" ]
+ENTRYPOINT ["./process.sh"]
