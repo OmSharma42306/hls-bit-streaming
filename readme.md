@@ -23,3 +23,8 @@ This project allows users to upload video files via a React frontend, processes 
 
 
 ![image info](./hls-architecture.png)
+
+
+## Scaling the HLS PROCESSING.
+
+![image info](./hls-architecture-for-scaling.png)
