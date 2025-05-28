@@ -11,15 +11,10 @@
 
     <video id=example-video width=960 height=540 class="video-js vjs-default-skin" autoplay controls>
         <source
-           src="https://hls-streaming-raw-videos.s3.ap-south-1.amazonaws.com/outputs/index.m3u8"
+           src="https://s3.ap-south-1.amazonaws.com/hls-streaming-final-files-by-omsharma.dev/outputs/index.m3u8"
            type="application/x-mpegURL">
       </video>
-     
-
-    
     <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-
-
     <script>
         var player = videojs('example-video');
         player.play();
