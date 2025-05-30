@@ -5,9 +5,12 @@
     import {S3Client,PutObjectCommand} from "@aws-sdk/client-s3"
     import dotenv from "dotenv"
     import { fileType } from "./types/types";
-
+    import initDb from "./models/userModel";
     // .env 
     dotenv.config();
+
+    // Database Stuff
+    initDb();
 
     // AWS CLIENT STUFF
     const s3 = new S3Client({
