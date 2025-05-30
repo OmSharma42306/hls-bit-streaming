@@ -1,13 +1,18 @@
-import Header from "./components/Header";
 import UploadForm from "./components/UploadForm";
+import VideoPreview from "./components/VideoPreview";
+import {BrowserRouter,Routes,Route} from "react-router-dom"
 
 function App() {
     
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-        <Header/>
-        <UploadForm/>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      
+      <Route path="/" element={<UploadForm/>}></Route>      
+      <Route path="/previewVideo" element={<VideoPreview/>}></Route>
+      
+    </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 const UploadForm = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [loading,setLoading] = useState<Boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (videoFile) {
@@ -26,9 +30,16 @@ const UploadForm = () => {
 
     console.log("upload successful!");
     console.log(response.data);
+    setLoading(true);
+    setTimeout(() => {
+      navigate('/previewVideo')
+    }, 200000);
+
   }
 
   return (
+    <div>
+    <Header/>
     <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
       <label className="block mb-4 text-sm font-medium text-gray-700">
         Select a video file:
@@ -54,6 +65,11 @@ const UploadForm = () => {
       >
         Convert to HLS
       </button>
+      {loading ?
+      <div>
+        Transcoding Takes Time....So Wait....At least 2-3 min...after video will be played...
+      </div> : ""}
+    </div>
     </div>
   );
 };
