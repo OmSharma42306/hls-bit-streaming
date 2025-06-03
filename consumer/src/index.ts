@@ -56,13 +56,7 @@ async function poll(){
     
 }
 
-
-poll()
-
-
-
 // All ECS STUFF
-
 async function runTask(s3Url:string){
     console.log(process.env.cluster!)
     console.log(process.env.taskDefinition!)
@@ -95,3 +89,20 @@ async function runTask(s3Url:string){
 
     await ecs.send(cmd);
 }
+
+
+
+async function startPolling(){
+    while(true){
+        try{
+        await poll();
+        }catch(error){
+            console.error('Error During Polling!',error)
+    }
+      // a small delay to avoild hammering the queue when it's empty..
+        await new Promise(res => setTimeout(res, 2000)); 
+    }
+    
+}
+
+startPolling();
