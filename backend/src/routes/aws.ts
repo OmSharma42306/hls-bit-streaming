@@ -39,7 +39,7 @@ const upload = multer();
 
         try{
             const url = await uploadToS3(file);
-            res.status(200).json({url:url});
+            res.status(200).json({msg:"Video Uploaded Successfully!",url:url});
             return;
         }catch(error){
             res.status(400).json({msg:error});
