@@ -2,7 +2,8 @@ import express,{ Request, Response } from "express";
 import {S3Client,PutObjectCommand} from "@aws-sdk/client-s3"
 import multer from "multer"
 import dotenv from "dotenv"
-import { fileType } from "../types/types";
+import {  fileType,authRequest } from "../types/types";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 // .env 
 dotenv.config();
@@ -23,12 +24,8 @@ const router = express.Router();
     
     
 const upload = multer();
-    
 
-    
-
-    
-    router.post("/upload-video",upload.single('file'),async(req:Request,res:Response)=>{
+    router.post("/upload-video",upload.single('file'),authMiddleware,async(req:authRequest,res:Response)=>{
         const file = req.file;
         if(!file){
             res.json(400).json({msg:"File is Empty!"});

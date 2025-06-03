@@ -1,3 +1,4 @@
+import { Request } from "express";
 export interface fileType {
     fieldname : string;
     originalname:string;
@@ -5,6 +6,12 @@ export interface fileType {
     mimetype : string;
     buffer:Buffer;
     size:number;
+}
+
+
+export interface authRequest extends Request{
+    userId?:string;
+    
 }
 
 
