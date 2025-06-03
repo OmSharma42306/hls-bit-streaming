@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   Play, 
   Eye, 
@@ -11,6 +11,8 @@ import {
   Shield,
   Zap
 } from 'lucide-react';
+import { signUp,signIn } from '../api/api';
+
 
 export default function AuthPages() {
   const [currentPage, setCurrentPage] = useState('login'); // 'login' or 'signup'
@@ -66,13 +68,23 @@ export default function AuthPages() {
     e.preventDefault();
     if (!validateForm()) return;
     
+    console.log(e.data);
+    console.log(e);
+    
     setIsLoading(true);
     // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log(`${currentPage} submitted:`, formData);
-      // Handle success/redirect here
-    }, 2000);
+
+    if(currentPage === 'login'){
+      const data = await signIn(formData);
+      const msg = data.msg;
+      const token = msg.token;
+      localStorage.setItem('token',token);
+      alert(msg);
+    }else if(currentPage === 'signup'){      
+      const data = await signUp(formData);
+      const msg = data.msg;
+      alert(msg);
+    }
   };
 
   const switchPage = (page:any) => {

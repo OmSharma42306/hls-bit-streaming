@@ -48,8 +48,11 @@ const UploadForm = () => {
     try {
       
       const data = await uploadVideoToS3(formData);
-      console.log("Final Data",data)
-      console.log("Upload successful!");
+      const msg = data.msg;
+      const url = data.url;
+      alert(msg);
+      console.log("Transcoded URL : ",url)
+      
       setLoading(true); // start progress
     } catch (err) {
       console.error("Upload failed", err);

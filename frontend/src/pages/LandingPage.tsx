@@ -29,12 +29,12 @@ export default function StreamingLandingPage() {
     { icon: Smartphone, title: "Multi-Platform", desc: "Works on any device" }
   ];
 
-  const stats = [
-    { number: "10M+", label: "Active Users" },
-    { number: "99.9%", label: "Uptime" },
-    { number: "150+", label: "Countries" },
-    { number: "<100ms", label: "Latency" }
-  ];
+  // const stats = [
+  //   { number: "10M+", label: "Active Users" },
+  //   { number: "99.9%", label: "Uptime" },
+  //   { number: "150+", label: "Countries" },
+  //   { number: "<100ms", label: "Latency" }
+  // ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,8 +65,8 @@ export default function StreamingLandingPage() {
 
           <div className="hidden md:flex items-center space-x-8">
             <a href="#features" className="hover:text-purple-400 transition-colors">Features</a>
-            <a href="#pricing" className="hover:text-purple-400 transition-colors">Pricing</a>
-            <a href="#docs" className="hover:text-purple-400 transition-colors">Docs</a>
+            {/* <a href="#pricing" className="hover:text-purple-400 transition-colors">Pricing</a> */}
+            {/* <a href="#docs" className="hover:text-purple-400 transition-colors">Docs</a> */}
             <button className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105" onClick={()=>{navigate("/auth")}}>
               Get Started
             </button>
@@ -84,8 +84,8 @@ export default function StreamingLandingPage() {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-lg p-6 space-y-4">
             <a href="#features" className="block hover:text-purple-400 transition-colors">Features</a>
-            <a href="#pricing" className="block hover:text-purple-400 transition-colors">Pricing</a>
-            <a href="#docs" className="block hover:text-purple-400 transition-colors">Docs</a>
+            {/* <a href="#pricing" className="block hover:text-purple-400 transition-colors">Pricing</a>
+            <a href="#docs" className="block hover:text-purple-400 transition-colors">Docs</a> */}
             <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full">
               Get Started
             </button>
@@ -124,7 +124,8 @@ export default function StreamingLandingPage() {
             </button>
           </div>
 
-{/* Removed Stats. */}
+
+    {/* Removed Stats. */}
           {/* Stats */}
           {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {stats.map((stat, index) => (
