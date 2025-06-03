@@ -12,6 +12,7 @@ import {
   Zap
 } from 'lucide-react';
 import { signUp,signIn } from '../api/api';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function AuthPages() {
@@ -24,6 +25,7 @@ export default function AuthPages() {
   });
   const [errors, setErrors] = useState<any>({});
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e:any) => {
     const { name, value } = e.target;
@@ -67,22 +69,25 @@ export default function AuthPages() {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
-    console.log(e.data);
-    console.log(e);
-    
+
     setIsLoading(true);
     // Simulate API call
 
     if(currentPage === 'login'){
       const data = await signIn(formData);
       const msg = data.msg;
-      const token = msg.token;
-      localStorage.setItem('token',token);
+      const token = data.token;
+      
+      localStorage.setItem('token',token);    
+      setIsLoading(false)
       alert(msg);
+      navigate('/uploadVideo')
+      
+      
     }else if(currentPage === 'signup'){      
       const data = await signUp(formData);
       const msg = data.msg;
+      setIsLoading(false);
       alert(msg);
     }
   };

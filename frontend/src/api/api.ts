@@ -2,7 +2,7 @@ import axios from "axios";
 import type { formDataTypeForSignIn,formDataTypeForSignUp } from "../types/types";
 
 const host = import.meta.env.VITE_HOST
-
+const token = localStorage.getItem('token');
 
 export async function signUp(formData:formDataTypeForSignUp){
   console.log(formData);
@@ -19,10 +19,11 @@ export async function signIn(formData:formDataTypeForSignIn){
 }
 
 export async function uploadVideoToS3(formData:any){
-  console.log("Kya Bolu me!?",formData);
-    const response = await axios.post(`http://${host}/api/v1/aws/upload-video`, formData, {
+  console.log("KEERTHI",token)  ;
+  const response = await axios.post(`http://${host}/api/v1/aws/upload-video`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${token}`
         }
       });
       return response.data;
